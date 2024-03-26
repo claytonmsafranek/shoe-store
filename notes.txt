@@ -1,0 +1,14 @@
+TODOs:
+- refactor weld of fof creat-react-app onto vite
+
+Alternatives to useEffect for HTTP calls
+- Tanstack query
+- swr (Vercel)
+- Apollo
+- Tanstack Router
+- Remix
+- Next.js with RSC
+
+Notes:
+- <ErrorBoundary /> only handles uncaught errors, if we are catching errors it will run that code first
+
