@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { Product } from "./types/product";
-import { useUserContext } from "./context/UserContext";
+import { useAtom } from "jotai";
+import { userAtom } from "./atoms/userAtom";
 
 type NavBarProps = {
     cart: Product[];
 }
 
 export function NavBar(props: NavBarProps) {
-    const { user, setUser } = useUserContext();
+    const [ user, setUser ] = useAtom(userAtom);
 
     return (
         <nav>
