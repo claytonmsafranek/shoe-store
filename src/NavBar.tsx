@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { Product } from "./types/product";
-import { useUserContext } from "./context/UserContext";
+import { useSnapshot } from "valtio";
+import { userState } from "./state/userState";
 
 type NavBarProps = {
     cart: Product[];
 }
 
 export function NavBar(props: NavBarProps) {
-    const { user, setUser } = useUserContext();
+    const { user } = useSnapshot(userState);
 
     return (
         <nav>
@@ -17,7 +18,7 @@ export function NavBar(props: NavBarProps) {
             <Link to='/cart'>Cart ({props.cart.length})</Link>
 
             {user && (
-                <p>Hi {user.name}. <button onClick={(() => setUser(null))}>Logout</button></p>
+                <p>Hi {user.name}. <button onClick={(() => { user = null })}>Logout</button></p>
             )}
         </nav>
     )
