@@ -12,3 +12,10 @@ Alternatives to useEffect for HTTP calls
 Notes:
 - <ErrorBoundary /> only handles uncaught errors, if we are catching errors it will run that code first
     - We could use this as a last ditch effort in weld? Just for errors to bubble up should they not be caught at the source
+- for shareable state, like wanting to share a url, store state in the url when possible
+- you only want to lift state when a few components need to access the same state - lift to the lowest common component
+- indexdb is better for lots of data and lots of read/writes
+- local storage is good for small amounts of data and not too frequent read/writes, localstorage is a synchronous api so it will get slow if you are working with a lot of data
+and we will see that the browser will lock and freeze up when it is accessing
+- check out Ui.dev, they have a lot of public open source hooks (thye are all in the index.js file on their github repo)
+
