@@ -5,6 +5,10 @@ import { Admin } from "./Admin";
 import { Product, productSchema } from "./types/product";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { z } from "zod";
+import { useState } from "react";
+import { User } from "./types/user";
+import { UserContextProvider } from "./context/UserContext";
+import { NavBar } from "./NavBar";
 
 export function App() {
     const [itemsInCart, setItemsInCart] = useLocalStorage<Product[]>(
@@ -12,20 +16,21 @@ export function App() {
         [],
         z.array(productSchema)
     );
+    const [user, setUser] = useState<User | null>({
+        id: 1,
+        name: "Default User",
+        email: "defaultUser@user.com",
+        password: "password"
+    });
 
     return (
-        <>
-            <nav>
-                <Link to='/'>Products</Link>
-                <Link to='/about'>About</Link>
-                <Link to='/admin'>Admin</Link>
-                <Link to='/cart'>Cart ({itemsInCart.length})</Link>
-            </nav>
+        <UserContextProvider user={user} setUser={setUser}>
+            <NavBar cart={itemsInCart} />
             <Routes>
                 <Route path="/" element={<Products setCart={setItemsInCart} cart={itemsInCart}/>} />
                 <Route path="/about" Component={About} />
                 <Route path="/admin" Component={Admin} />
             </Routes>
-        </>
+        </UserContextProvider>
     )
 }

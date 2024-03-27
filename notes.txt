@@ -9,6 +9,28 @@ Alternatives to useEffect for HTTP calls
 - Remix
 - Next.js with RSC
 
+Third party state management options
+    - unidirectional - one immutable store options:
+        - Redux
+        - Zustand
+    - remote state - state fetched from a server (typically via REST or GraphQL)
+        - React query
+        - Apollo
+        - Swr
+        - RTK Query (redux but tweaked to focus on server state)
+    -proxy state - abstract state behind a proxy object. can mutate proxy. renders are automatically optimized (when proxy is mutated it knows what to rerender)
+        - Valtio
+        - Mobx
+    - atomic state - small pieces of mutable state. similar to react context pattern. renders rae optimized by atom consumption
+        - Jotai
+        - Recoil
+    - state machine - enforced transitions. state charts. good for highly complex state with many transitions
+        - XState
+    - router state
+        - Tanstack Router (loaders)
+        - React Router (loaders)
+
+
 Notes:
 - <ErrorBoundary /> only handles uncaught errors, if we are catching errors it will run that code first
     - We could use this as a last ditch effort in weld? Just for errors to bubble up should they not be caught at the source
@@ -18,4 +40,6 @@ Notes:
 - local storage is good for small amounts of data and not too frequent read/writes, localstorage is a synchronous api so it will get slow if you are working with a lot of data
 and we will see that the browser will lock and freeze up when it is accessing
 - check out Ui.dev, they have a lot of public open source hooks (thye are all in the index.js file on their github repo)
+- context is often overused, context should be used for global data that RARELY changed, because if context values change, everything under context has to rerender, this is sometimes
+the entire app that has to rerender
 
