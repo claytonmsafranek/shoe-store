@@ -18,7 +18,7 @@ export function NavBar(props: NavBarProps) {
             <Link to='/cart'>Cart ({props.cart.length})</Link>
 
             {user && (
-                <p>Hi {user.name}. <button onClick={(() => { user = null })}>Logout</button></p>
+                <p>Hi {user.name}. <button onClick={(() => { userState.user = null })}>Logout</button></p>
             )}
         </nav>
     )
