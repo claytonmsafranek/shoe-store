@@ -11,4 +11,4 @@ Alternatives to useEffect for HTTP calls
 
 Notes:
 - <ErrorBoundary /> only handles uncaught errors, if we are catching errors it will run that code first
-
+    - We could use this as a last ditch effort in weld? Just for errors to bubble up should they not be caught at the source
