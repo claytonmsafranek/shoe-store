@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import { SearchBar } from "./SearchBar";
 import { useProducts } from "./hooks/useProducts";
-import { Product } from "./types/product";
+import { useSearchParams } from "react-router-dom";
 
 export default function Products() {
   const {data: products = [], error, isLoading } = useProducts();
-  const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  const search = searchParams.get("search") ?? "";
   
   if (error) throw error;
   if (isLoading) return <h1>Loading...</h1>
@@ -24,7 +23,7 @@ export default function Products() {
         id="searchBox" 
         name="searchBox"
         placeholder="Search ..." 
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => setSearchParams({search: e.target.value})}
       />
       {matchingProducts.length > 0 ? (
       <table style={{border: "1px solid"}}>
