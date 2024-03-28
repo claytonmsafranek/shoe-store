@@ -6,7 +6,14 @@ import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { App } from './App.tsx'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      throwOnError: true,
+    },
+  },
+});
 
 async function enableMocking() {
   if (import.meta.env.VITE_ENABLE_MOCKS === "true") {
