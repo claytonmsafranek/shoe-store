@@ -6,6 +6,7 @@
   "scripts": {
     "start": "concurrently npm:start-app npm:start-api",
     "start-mock": "cross-env VITE_ENABLE_MOCKS=true vite --port 3000 --open --strictPort",
+    "start:pw-mocks" : "concurrently npm:start-mock npm:playwright:mock",
     "start-app": "vite --port 3000 --open --strictPort",
     "start-api": "json-server --watch db.json --port 3001",
     "build": "tsc && vite build",
@@ -14,7 +15,9 @@
     "playwright-codegen": "playwright codegen http://localhost:3000",
     "start:codegen": "concurrently npm:start npm:playwright-codegen",
     "start:e2e": "concurrently npm:start npm:playwright:e2e",
-    "playwright:e2e": "playwright test e2e --ui"
+    "playwright:e2e": "playwright test e2e --ui",
+    "playwright:mock" : "playwright test mock --ui"
+
   },
   "dependencies": {
     "@tanstack/react-query": "^5.28.8",

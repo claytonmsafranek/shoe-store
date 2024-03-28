@@ -49,6 +49,7 @@ export default function Products(props: ProductsProps) {
               <th>{product.description}</th>
               <th>
                 <button
+                  aria-label={`Add ${product.name} to cart`}
                   onClick={() => {
                     props.setCart([...props.cart, product])
                   }}
