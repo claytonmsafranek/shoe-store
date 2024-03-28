@@ -8,14 +8,25 @@ import { App } from './App.tsx'
 
 const queryClient = new QueryClient();
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ErrorBoundary fallback={<h1>Oops! An error occured.</h1>}>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </QueryClientProvider>
-    </ErrorBoundary>
-  </React.StrictMode>,
-)
+async function enableMocking() {
+  if (import.meta.env.VITE_ENABLE_MOCKS === "true") {
+    const { worker } = await import ("./mocks/browser.ts");
+    return worker.start();
+  }
+}
+
+// enable mocking then render app
+enableMocking().then(() => {
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+      <ErrorBoundary fallback={<h1>Oops! An error occured.</h1>}>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </QueryClientProvider>
+      </ErrorBoundary>
+    </React.StrictMode>,
+  );
+});
+

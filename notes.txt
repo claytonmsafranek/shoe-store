@@ -43,3 +43,8 @@ and we will see that the browser will lock and freeze up when it is accessing
 - context is often overused, context should be used for global data that RARELY changed, because if context values change, everything under context has to rerender, this is sometimes
 the entire app that has to rerender
 
+Testing:
+- unit test: testing one thing all by itself (a button component)
+    - a unit test should not call a DB, run a browser, make an HTTP call, or rely on stuff on other machines
+- integration test: testing afew things together, (maybe a form)
+- e2e test: everything is real, going into the browser fill out forms, look for spinners, don't mock anything
